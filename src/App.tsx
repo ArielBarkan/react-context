@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from 'react';
+
+
+import { DisplayCounter } from './components/DisplayCounter';
+
+
+export const CounterContext: any = createContext(0);
+
 
 function App() {
+
+  const [counter, setCounter] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CounterContext.Provider value={counter}>
+      <section>
+        <DisplayCounter />
+
+        <button onClick={() => setCounter(counter + 1)}>Add</button>
+        <button onClick={() => setCounter(prev => prev < 1 ? 0 : counter - 1)}>Remove</button>
+      </section>
+    </CounterContext.Provider>
   );
 }
 
